@@ -15,3 +15,9 @@ Contrôles : ◀️🔼🔽▶️, barre espace pour lancer et Q pour quitter.
 <hr>
 
 Vous pouvez télécharger dans les releases de cette page github ou directement en cliquant [ici](https://github.com/Najinc/Minotaur/releases)
+
+## INSTALLATION :
+
+> - Télécharger le ZIP comme énoncé ci-dessus.
+> - Décompresser le dossier.
+> - Ouvrir le dossier Minotaur et exécuter **Minotaur.exe**.
