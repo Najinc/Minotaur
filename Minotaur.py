@@ -27,14 +27,14 @@ class App:
         self.screen = pg.display.set_mode(self.SCREEN_SIZE, pg.RESIZABLE | pg.SCALED | pg.FULLSCREEN)
         self.playerimg = pg.image.load(resource_path("assets/minotaur.png")).convert_alpha() #self.chemin+"\\assets\\minotaur.png"
         self.clock = pg.time.Clock()
-        self.wallhit_sounds = ["algogole.mp3"]
-        self.lifeUp_sounds = ["ameno.mp3", "powerup.mp3"]
-        self.back_sounds = ["retourne-cuisine.mp3", "cheh.mp3","sad.mp3", "concentretoi.mp3"]
-        self.reverse_sounds = ["cri.mp3", "ratiosandron.mp3"]
-        self.menu_music = pg.mixer.Sound(resource_path("Minotaur/sounds/external-8bits.mp3")) #"self.chemin+"\\sounds\\external-8bits.mp3"
-        self.final_sound = pg.mixer.Sound(resource_path("Minotaur/sounds/psycho.mp3")) #self.chemin+"\\sounds\\psycho.mp3"
+        self.wallhit_sounds = ["algogole.ogg"]
+        self.lifeUp_sounds = ["ameno.ogg", "powerup.ogg"]
+        self.back_sounds = ["retourne-cuisine.ogg", "cheh.ogg","sad.ogg"]
+        self.reverse_sounds = ["cri.ogg", "ratiosandron.ogg"]
+        self.menu_music = pg.mixer.Sound(resource_path("sounds/external-8bits.ogg")) #"self.chemin+"\\sounds\\external-8bits.ogg"
+        self.final_sound = pg.mixer.Sound(resource_path("sounds/psycho.ogg")) #self.chemin+"\\sounds\\psycho.ogg"
         self.score = 0
-        self.font = pg.font.Font(resource_path("Minotaur/assets/ARCADE.ttf"), 50) #self.chemin+"\\assets\\ARCADE.ttf"
+        self.font = pg.font.Font(resource_path("assets/ARCADE.ttf"), 50) #self.chemin+"\\assets\\ARCADE.ttf"
         self.player_x = 1
         self.player_y = 1
         self.end_x = None
@@ -44,16 +44,16 @@ class App:
         self.state = "start"
         self.reverseCmds = 0
         self.health = 3
-        self.level_amount = 7
+        self.level_amount = 1
         self.create_levels(self.level_amount)
         self.bg_images = []
         self.mpos = [0, 0]
         self.levelfinishsed = False
         self.dt = 0
-        self.generate_images(resource_path("Minotaur/images")) # self.chemin+"\\images"
+        self.generate_images(resource_path("images")) # self.chemin+"\\images"
         self.move_timer = 0 # milliseconds
-        self.item1_img = pg.image.load(resource_path("Minotaur/assets/reverseCmds.png")).convert_alpha() # self.chemin+"\\assets/reverseCmds.png"
-        self.item2_img = pg.image.load(resource_path("Minotaur/assets/health.png")).convert_alpha() # self.chemin+"\\assets/health.png"
+        self.item1_img = pg.image.load(resource_path("assets/reverseCmds.png")).convert_alpha() # self.chemin+"\\assets/reverseCmds.png"
+        self.item2_img = pg.image.load(resource_path("assets/health.png")).convert_alpha() # self.chemin+"\\assets/health.png"
         self.menu = Menu(self, self.SCREEN_SIZE, self.bg_images, self.font)
         self.campos = (0, 0)
         self.zoomfactor = 2
@@ -104,7 +104,7 @@ class App:
                 self.player_x = 1 ## On remet le joueur au début
                 self.player_y = 1
                 pg.mixer.stop()
-                pg.mixer.Sound(resource_path(f"Minotaur/sounds/{self.back_sounds[randint(0, len(self.back_sounds)-1)]}")).play()
+                pg.mixer.Sound(resource_path(f"sounds/{self.back_sounds[randint(0, len(self.back_sounds)-1)]}")).play()
 
             if self.reverseCmds>0: # Si le joueur a mangé un item, il peut inverser les commandes
                 if keys[pg.K_UP]:
@@ -165,7 +165,7 @@ class App:
                 print("WALL, can't move")
                 self.health -= 1
                 pg.mixer.stop()
-                pg.mixer.Sound(resource_path(f"Minotaur/sounds/{self.wallhit_sounds[randint(0, len(self.wallhit_sounds)-1)]}")).play()
+                pg.mixer.Sound(resource_path(f"sounds/{self.wallhit_sounds[randint(0, len(self.wallhit_sounds)-1)]}")).play()
             elif iswall == 0:
                 print("MOVEMENT")
                 self.player_x = newx
@@ -179,14 +179,14 @@ class App:
                 current_level[newy][newx] = 0
                 self.reverseCmds=randint(3,15)
                 pg.mixer.stop()
-                pg.mixer.Sound(resource_path(f"Minotaur/sounds/{self.reverse_sounds[randint(0, len(self.reverse_sounds)-1)]}")).play()
+                pg.mixer.Sound(resource_path(f"sounds/{self.reverse_sounds[randint(0, len(self.reverse_sounds)-1)]}")).play()
             elif iswall == 4: # HEALTH ITEM
                 self.health += 1
                 self.player_x = newx
                 self.player_y = newy
                 current_level[newy][newx] = 0
                 pg.mixer.stop()
-                pg.mixer.Sound(resource_path(f"Minotaur/sounds/{self.lifeUp_sounds[randint(0, len(self.lifeUp_sounds)-1)]}")).play()
+                pg.mixer.Sound(resource_path(f"sounds/{self.lifeUp_sounds[randint(0, len(self.lifeUp_sounds)-1)]}")).play()
         self.draw_maze(current_level)
         camx = (self.zoomfactor + -self.player_x)*self.tilesize*self.zoomfactor
         camy = (self.zoomfactor + -self.player_y)*self.tilesize*self.zoomfactor
