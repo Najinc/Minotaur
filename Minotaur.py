@@ -44,7 +44,7 @@ class App:
         self.state = "start"
         self.reverseCmds = 0
         self.health = 3
-        self.level_amount = 1
+        self.level_amount = 7
         self.create_levels(self.level_amount)
         self.bg_images = []
         self.mpos = [0, 0]
